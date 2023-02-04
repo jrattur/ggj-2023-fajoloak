@@ -1,13 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MoveController : MonoBehaviour
 {
     [SerializeField]
-    float _speedByInput;
+    float _speedMove;
     [SerializeField]
     float _rotationSpeedDeg;
+    [SerializeField]
+    float _brakeUpDown;
+    [SerializeField]
+    float _accelUpDown;
     [SerializeField]
     bool _isControlByArrow = false;
 
@@ -21,52 +26,86 @@ public class MoveController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _moveVelocity = Vector3.zero;
+        if (0f < _moveVelocity.y) {
+            Debug.Log($"{_moveVelocity.y} + {_accelUpDown * _upDownSign} - {_brakeUpDown}");
+            _moveVelocity.y = Mathf.Clamp(_moveVelocity.y + _accelUpDown * _upDownSign - _brakeUpDown, 0f, 1f);
+        }
+        else if (_moveVelocity.y < 0f) {
+            Debug.Log($"{_moveVelocity.y} + {_accelUpDown * _upDownSign} - {_brakeUpDown}");
+            _moveVelocity.y = Mathf.Clamp(_moveVelocity.y + _accelUpDown * _upDownSign + _brakeUpDown, -1f, 0f);
+        } else {
+            Debug.Log($"{_moveVelocity.y} + {_accelUpDown * _upDownSign}");
+            _moveVelocity.y = Mathf.Clamp(_moveVelocity.y + _accelUpDown * _upDownSign, -1f, 1f);
+        }
+    }
 
-        if (Input.GetKey(_isControlByArrow ? KeyCode.DownArrow : KeyCode.S)) {
-            _moveVelocity.y -= _speedByInput;
+    public void OnMoveXZ(InputAction.CallbackContext context)
+    {
+        Vector2 move = context.ReadValue<Vector2>();
+        _moveVelocity.x = move.x;
+        _moveVelocity.z = move.y;
+    }
+
+    public void OnMoveUp(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            _upDownSign = 1f;
         }
-        else if (Input.GetKey(_isControlByArrow ? KeyCode.UpArrow : KeyCode.W)) {
-            _moveVelocity.y += _speedByInput;
-        }
-        if (Input.GetKey(_isControlByArrow ? KeyCode.LeftArrow : KeyCode.A)) {
-            _moveVelocity.x -= _speedByInput;
-        }
-        else if (Input.GetKey(_isControlByArrow ? KeyCode.RightArrow : KeyCode.D)) {
-            _moveVelocity.x += _speedByInput;
+        else if (context.phase == InputActionPhase.Canceled)
+        {
+            _upDownSign = 0f;
         }
 
     }
 
+    public void OnMoveDown(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            _upDownSign = -1f;
+        }
+        else if (context.phase == InputActionPhase.Canceled)
+        {
+            _upDownSign = 0f;
+        }
+    }
+
     private void FixedUpdate()
     {
-        _position += _moveVelocity * Time.deltaTime;
-        float angle = _rotation.eulerAngles.z;
-        if (180f < angle) {
-            angle -= 360f;
+        _position += _moveVelocity * _speedMove * Time.deltaTime;
+        Vector3 direction = _moveVelocity;
+        direction.Normalize();
+        if (direction != Vector3.zero) {
+            _rotation = Quaternion.RotateTowards(Quaternion.FromToRotation(Vector3.right, direction), _rotation, _rotationSpeedDeg);
         }
-        goalAngle = Mathf.Atan2(_moveVelocity.y, Mathf.Abs(_moveVelocity.x)) * Mathf.Rad2Deg;
-        float rotateY = _moveVelocity.x < 0f ? 180f : 0f;
-        // if (90f < Mathf.Abs(goalAngle)) {
-        //     goalAngle = (180f - Mathf.Abs(goalAngle)) * Mathf.Sign(goalAngle);
-        //     rotateY = 180f;
-        // }
-        goalAngle = Mathf.Clamp(goalAngle, -45f, 45f);
+        Debug.Log(_position);
 
-        float diffToGoal = goalAngle - angle;
-        Debug.Log($"{diffToGoal}, {goalAngle}, {angle}");
-        if (Mathf.Abs(diffToGoal) < _rotationSpeedDeg) {
-            angle = goalAngle;
-        } else {
-            angle += Mathf.Sign(diffToGoal) * _rotationSpeedDeg;
-        }
-        _rotation = Quaternion.Euler(0f, rotateY, angle);
+        // float angle = _rotation.eulerAngles.z;
+        // if (180f < angle) {
+        //     angle -= 360f;
+        // }
+        // goalAngle = Mathf.Atan2(_moveVelocity.y, Mathf.Abs(_moveVelocity.x)) * Mathf.Rad2Deg;
+        // float rotateY = _moveVelocity.x < 0f ? 180f : 0f;
+        // // if (90f < Mathf.Abs(goalAngle)) {
+        // //     goalAngle = (180f - Mathf.Abs(goalAngle)) * Mathf.Sign(goalAngle);
+        // //     rotateY = 180f;
+        // // }
+        // goalAngle = Mathf.Clamp(goalAngle, -45f, 45f);
+
+        // float diffToGoal = goalAngle - angle;
+        // if (Mathf.Abs(diffToGoal) < _rotationSpeedDeg) {
+        //     angle = goalAngle;
+        // } else {
+        //     angle += Mathf.Sign(diffToGoal) * _rotationSpeedDeg;
+        // }
         this.transform.SetPositionAndRotation(_position, _rotation);
     }
 
     private Vector3 _moveVelocity;
     private Vector3 _position;
     private Quaternion _rotation;
+    private float _upDownSign;
     [SerializeField]
     private float goalAngle;
 }
