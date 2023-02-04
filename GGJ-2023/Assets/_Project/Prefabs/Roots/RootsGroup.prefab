@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4436334991440645254
+--- !u!1 &2222769993579011665
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,43 +8,44 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4436334991440645249}
-  - component: {fileID: 4436334991440645248}
+  - component: {fileID: 2222769993579011664}
+  - component: {fileID: 2222769993579011671}
   m_Layer: 0
-  m_Name: Seek
+  m_Name: RootsGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4436334991440645249
+--- !u!4 &2222769993579011664
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4436334991440645254}
+  m_GameObject: {fileID: 2222769993579011665}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 50, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4436334991440645248
+--- !u!114 &2222769993579011671
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4436334991440645254}
+  m_GameObject: {fileID: 2222769993579011665}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d58e2a5bdd3e0340a9a09cb46402f66, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d1e6f677c031f5449d39d0d548a9ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seekStrength: 6
-  seekFoundDistance: 5
-  seekPoint: {fileID: 0}
-  found: 0
+  nutrients: 100
+  numberOfRoots: 50
+  rootPrefab: {fileID: 3138330777012738704, guid: cf864b2eb81f9ce4c9f3ea183abe2362, type: 3}
+  seekComponents: []
+  closestNutrient: {fileID: 0}
