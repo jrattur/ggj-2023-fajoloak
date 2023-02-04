@@ -19,6 +19,7 @@ public class MoveController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _body = this.GetComponent<Rigidbody>();
         _position = this.transform.position;
         _rotation = this.transform.localRotation;
     }
@@ -80,19 +81,29 @@ public class MoveController : MonoBehaviour
             + _inputVelocity.x * cameraRightXZ
             + _inputVelocity.y * Vector3.up;
         moveVelocity *= _speedMove;
-        _position += moveVelocity * Time.deltaTime;
         Vector3 direction = moveVelocity;
         direction.Normalize();
         if (direction != Vector3.zero) {
             _rotation = Quaternion.RotateTowards(Quaternion.FromToRotation(Vector3.forward, direction), _rotation, _rotationSpeedDeg);
         }
 
-        var body = this.GetComponent<Rigidbody>();
-        if (body == null) {
+        if (_body == null) {
+            _position += moveVelocity * Time.deltaTime;
             this.transform.SetPositionAndRotation(_position, _rotation);
         } else {
-            body.MovePosition(_position);
-            body.rotation = _rotation;
+            // RaycastHit hitInfo;
+            
+            // _body.position -= moveVelocity.normalized * 0.01f;
+            // if (_body.SweepTest(moveVelocity.normalized, out hitInfo, moveVelocity.magnitude * Time.deltaTime + 0.01f)) {
+            //     _position = hitInfo.point;
+            // }
+            // _body.MovePosition(_position);
+            // _body.rotation = _rotation;
+            if (_body.velocity.magnitude < _speedMove) {
+                _body.AddForce(moveVelocity);
+            }
+
+            _body.rotation = _rotation;
         }
     }
 
@@ -105,6 +116,7 @@ public class MoveController : MonoBehaviour
         }
     }
 
+    private Rigidbody _body;
     private Vector3 _inputVelocity;
     private Vector3 _position;
     private Quaternion _rotation;
