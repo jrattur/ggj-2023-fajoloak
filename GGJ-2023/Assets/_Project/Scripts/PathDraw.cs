@@ -26,6 +26,8 @@ public class PathDraw : MonoBehaviour
             var drawnObject = Instantiate(drawPrefab, createPosition, transform.rotation);
             drawnObject.transform.LookAt(startPosition);
 
+            //drawnObject.transform.localScale = new Vector3()
+
             startPosition = transform.position;
             timer = 0f;
         }

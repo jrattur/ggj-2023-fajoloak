@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wander : MonoBehaviour
+public class WanderBehaviour : SteeringBehaviour
 {
+
     [SerializeField]
     private float wanderSphereDistance = 0.2f;
 
@@ -11,35 +12,14 @@ public class Wander : MonoBehaviour
     private float wanderAngleLimit = 30f;
 
     [SerializeField]
-    private float wanderCircleDistance = 5f;
-
-    [SerializeField]
     private float wanderCircleRadius = 1f;
 
     [SerializeField]
-    private float wanderStrength = 1f;
-
-    [SerializeField]
-    private float walkingSpeed = 1f;
-
-    private Vector3 previousPosition, velocity;
-
-    // Update is called once per frame
-    void Update()
-    {
-
-        velocity = (transform.position - previousPosition) / Time.deltaTime;
-        Vector3 wander = calculateWander(velocity) * wanderStrength;
-
-        var steering = wander;
-
-        previousPosition = transform.position;
-        transform.position += steering * walkingSpeed * Time.deltaTime;
-
-    }
+    private float wanderSpeed = 1f;
 
     float wanderAngle = 0f;
-    private Vector3 calculateWander(Vector3 velocity)
+
+    public override Vector3 calculateMove()
     {
         var wander = Vector3.zero;
 
@@ -49,6 +29,6 @@ public class Wander : MonoBehaviour
         Debug.DrawLine(transform.position, transform.position + circleCentre, Color.blue);
         Debug.DrawLine(transform.position + circleCentre, transform.position + circleCentre + wander, Color.blue);
 
-        return wander;
+        return wander * wanderSpeed;
     }
 }
