@@ -34,6 +34,7 @@ public class RootController : MonoBehaviour
             UnityEngine.Debug.Log("zzz" + parentName + "ccc" + gameObject.transform.root.name);
             if (parentName == gameObject.transform.root.name)
             {
+                Seek.OnDestroyNutrients -= HandleEvent;
                 UnityEngine.Debug.Log("sadfsdafds");
                 stopWatch.Reset();
                 stopWatch.Start();
@@ -42,7 +43,6 @@ public class RootController : MonoBehaviour
                 foreach (Transform child in GetComponentsInChildren<Transform>(true))
                 {
                     if (child.name != gameObject.name) { 
-                    Seek.OnDestroyNutrients -= HandleEvent;
                     child.gameObject.SetActive(false);
                 }
                 }
@@ -64,6 +64,7 @@ public class RootController : MonoBehaviour
     {
         if (stopped) {
             if (stopWatch.Elapsed.Seconds > 5f) {
+                Seek.OnDestroyNutrients += HandleEvent;
                 UnityEngine.Debug.Log("Renable!!!!");
                 stopWatch.Stop();
                 stopWatch.Reset();

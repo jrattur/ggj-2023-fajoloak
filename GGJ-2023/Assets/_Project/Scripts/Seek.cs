@@ -26,7 +26,7 @@ public class Seek : SteeringBehaviour
         if (seek.magnitude < seekFoundDistance) {
             found = true;
             OnDestroyNutrients?.Invoke(transform.root.name);
-            seekPoint.SetActive(false);
+            Destroy(seekPoint.gameObject);
         }
 
         return seek.normalized * seekStrength;
