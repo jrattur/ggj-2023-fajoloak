@@ -12,7 +12,6 @@ public class ScaleOnCollision : MonoBehaviour
         if (collision.gameObject.CompareTag(targetTag))
         {
             transform.localScale *= scaleFactor;
-            target.transform.position=new Vector3(transform.position.x,transform.position.y + 100,transform.position.z);
 
         }
     }
