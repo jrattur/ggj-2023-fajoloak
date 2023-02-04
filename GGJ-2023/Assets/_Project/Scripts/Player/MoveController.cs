@@ -27,14 +27,11 @@ public class MoveController : MonoBehaviour
     void Update()
     {
         if (0f < _inputVelocity.y) {
-            Debug.Log($"{_inputVelocity.y} + {_accelUpDown * _upDownSign} - {_brakeUpDown}");
             _inputVelocity.y = Mathf.Clamp(_inputVelocity.y + _accelUpDown * _upDownSign - _brakeUpDown, 0f, 1f);
         }
         else if (_inputVelocity.y < 0f) {
-            Debug.Log($"{_inputVelocity.y} + {_accelUpDown * _upDownSign} - {_brakeUpDown}");
             _inputVelocity.y = Mathf.Clamp(_inputVelocity.y + _accelUpDown * _upDownSign + _brakeUpDown, -1f, 0f);
         } else {
-            Debug.Log($"{_inputVelocity.y} + {_accelUpDown * _upDownSign}");
             _inputVelocity.y = Mathf.Clamp(_inputVelocity.y + _accelUpDown * _upDownSign, -1f, 1f);
         }
     }
@@ -90,13 +87,27 @@ public class MoveController : MonoBehaviour
             _rotation = Quaternion.RotateTowards(Quaternion.FromToRotation(Vector3.forward, direction), _rotation, _rotationSpeedDeg);
         }
 
-        this.transform.SetPositionAndRotation(_position, _rotation);
+        var body = this.GetComponent<Rigidbody>();
+        if (body == null) {
+            this.transform.SetPositionAndRotation(_position, _rotation);
+        } else {
+            body.MovePosition(_position);
+            body.rotation = _rotation;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if (other.tag == "Gem") {
+            other.gameObject.SetActive(false);
+            _tmpScore += 50f;
+            Debug.Log($"Get Gem! Score is {_tmpScore}");
+            // AddScore();
+        }
     }
 
     private Vector3 _inputVelocity;
     private Vector3 _position;
     private Quaternion _rotation;
     private float _upDownSign;
-    [SerializeField]
-    private float goalAngle;
+    private float _tmpScore;
 }
