@@ -4,11 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
+<<<<<<< HEAD
   - Nutrient
+=======
   - Target
   - Camera_Cube
-  - RootsGroup
-  - Gem
+>>>>>>> be8287093497d04ad942c4447bed39f936161b89
   layers:
   - Default
   - TransparentFX

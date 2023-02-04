@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71a232f70db14c74fa621dc82e599073, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avoidStrength: 20
-  avoidRadius: 1
+  avoidStrength: 2
+  avoidRadius: 0.01
 --- !u!1 &3138330776523407034
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,7 +160,7 @@ Transform:
   - {fileID: 3138330776719268925}
   - {fileID: 3138330776523407035}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3138330777012738708
 MeshFilter:
@@ -287,7 +287,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2886492573681269293, guid: 5090be578399e2940b1979d8feab788d, type: 3}
       propertyPath: wanderSpeed
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -307,10 +307,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3138330776523407035}
     m_Modifications:
-    - target: {fileID: 4436334991440645248, guid: 3a19c2f1d9472b04191f27742a8b18fa, type: 3}
-      propertyPath: seekStrength
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 4436334991440645249, guid: 3a19c2f1d9472b04191f27742a8b18fa, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -358,10 +354,6 @@ PrefabInstance:
     - target: {fileID: 4436334991440645254, guid: 3a19c2f1d9472b04191f27742a8b18fa, type: 3}
       propertyPath: m_Name
       value: Seek
-      objectReference: {fileID: 0}
-    - target: {fileID: 4436334991440645254, guid: 3a19c2f1d9472b04191f27742a8b18fa, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
