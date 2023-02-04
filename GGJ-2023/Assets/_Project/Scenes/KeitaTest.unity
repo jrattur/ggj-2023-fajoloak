@@ -123,24 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &233573393 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4439562328691452378, guid: 10b142c4d6e2a364ea98674c48399057, type: 3}
-  m_PrefabInstance: {fileID: 325541355}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &233573394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 233573393}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c5784e673ff91a4e855c368794e1b99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speedByInput: 10
 --- !u!4 &233573396 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1096334187465926600, guid: 10b142c4d6e2a364ea98674c48399057, type: 3}
@@ -156,7 +138,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1096334187465926600, guid: 10b142c4d6e2a364ea98674c48399057, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1096334187465926600, guid: 10b142c4d6e2a364ea98674c48399057, type: 3}
       propertyPath: m_LocalPosition.x
@@ -164,7 +146,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1096334187465926600, guid: 10b142c4d6e2a364ea98674c48399057, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 4.94
       objectReference: {fileID: 0}
     - target: {fileID: 1096334187465926600, guid: 10b142c4d6e2a364ea98674c48399057, type: 3}
       propertyPath: m_LocalPosition.z
@@ -204,14 +186,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 1096334187465926600, guid: 10b142c4d6e2a364ea98674c48399057, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1306648392}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4439562328691452378, guid: 10b142c4d6e2a364ea98674c48399057, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 233573394}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10b142c4d6e2a364ea98674c48399057, type: 3}
 --- !u!1 &810634749
 GameObject:
@@ -317,7 +293,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &1009157219
 GameObject:
@@ -411,7 +387,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1306648389
 GameObject:
@@ -499,15 +475,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1306648389}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 5.94, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 233573396}
-  m_RootOrder: -1
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1818360608 &1306648393
-PositionConstraint:
+--- !u!1773428102 &1306648393
+ParentConstraint:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -516,13 +492,20 @@ PositionConstraint:
   m_Enabled: 1
   serializedVersion: 2
   m_Weight: 1
-  m_TranslationAtRest: {x: 0, y: 1, z: -10}
-  m_TranslationOffset: {x: 0, y: 1, z: -10}
-  m_AffectTranslationX: 0
-  m_AffectTranslationY: 0
+  m_TranslationAtRest: {x: 0, y: 5.94, z: -10}
+  m_RotationAtRest: {x: 0, y: 0, z: 0}
+  m_TranslationOffsets:
+  - {x: 0, y: 1, z: -10}
+  m_RotationOffsets:
+  - {x: 0, y: 0, z: 0}
+  m_AffectTranslationX: 1
+  m_AffectTranslationY: 1
   m_AffectTranslationZ: 0
+  m_AffectRotationX: 0
+  m_AffectRotationY: 0
+  m_AffectRotationZ: 0
   m_Active: 1
-  m_IsLocked: 0
+  m_IsLocked: 1
   m_Sources:
   - sourceTransform: {fileID: 233573396}
     weight: 1
