@@ -23,6 +23,8 @@ public class AgentSteering : MonoBehaviour
             steering += steeringBehaviour.calculateMove();
         }
 
+        transform.LookAt(transform.position + steering);
+
         previousPosition = transform.position;
         transform.position += steering * Time.deltaTime;
     }

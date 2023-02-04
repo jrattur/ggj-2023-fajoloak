@@ -5,44 +5,38 @@ using UnityEngine;
 public class AvoidBehaviour : SteeringBehaviour
 {
     [SerializeField]
-    private float avoidRayLength = 5f;
+    private float avoidStrength = 5f;
 
     [SerializeField]
-    private float avoidRayAngle = 20f;
-
-    [SerializeField]
-    private float avoidStrength = 10f;
+    private float avoidRadius = 20f;
 
     public override Vector3 calculateMove()
     {
-        var avoid = Vector3.zero;
+        RaycastHit hit;
 
-        List<Tuple<Vector3, Vector3>> avoidRays = new List<Tuple<Vector3, Vector3>>();
+        float distanceToObstacle = 0;
 
-        avoidRays.Add(new Tuple<Vector3, Vector3>(
-            transform.TransformDirection(new Vector3(avoidRayLength * Mathf.Cos((90 + avoidRayAngle) * Mathf.Deg2Rad), avoidRayLength * Mathf.Sin((90 + avoidRayAngle) * Mathf.Deg2Rad))),
-            transform.TransformDirection(new Vector3(-(avoidRayLength * Mathf.Cos((90 + avoidRayAngle) * Mathf.Deg2Rad)), avoidRayLength * Mathf.Sin((90 + avoidRayAngle) * Mathf.Deg2Rad)))));
-        avoidRays.Add(new Tuple<Vector3, Vector3>(
-            transform.TransformDirection(new Vector3(-(avoidRayLength * Mathf.Cos((90 + avoidRayAngle) * Mathf.Deg2Rad)), avoidRayLength * Mathf.Sin((90 + avoidRayAngle) * Mathf.Deg2Rad))),
-            transform.TransformDirection(new Vector3(avoidRayLength * Mathf.Cos((90 + avoidRayAngle) * Mathf.Deg2Rad), avoidRayLength * Mathf.Sin((90 + avoidRayAngle) * Mathf.Deg2Rad)))));
-        avoidRays.Add(new Tuple<Vector3, Vector3>(
-            transform.TransformDirection(new Vector3(avoidRayLength * Mathf.Cos((90 + avoidRayAngle * 2) * Mathf.Deg2Rad), avoidRayLength * Mathf.Sin((90 + avoidRayAngle * 2) * Mathf.Deg2Rad))),
-            transform.TransformDirection(new Vector3(-avoidRayLength * Mathf.Cos((90 + avoidRayAngle * 2) * Mathf.Deg2Rad), avoidRayLength * Mathf.Sin((90 + avoidRayAngle * 2) * Mathf.Deg2Rad)))));
-        avoidRays.Add(new Tuple<Vector3, Vector3>(
-            transform.TransformDirection(new Vector3(-(avoidRayLength * Mathf.Cos((90 + avoidRayAngle * 2) * Mathf.Deg2Rad)), avoidRayLength * Mathf.Sin((90 + avoidRayAngle * 2) * Mathf.Deg2Rad))),
-            transform.TransformDirection(new Vector3(avoidRayLength * Mathf.Cos((90 + avoidRayAngle * 2) * Mathf.Deg2Rad), avoidRayLength * Mathf.Sin((90 + avoidRayAngle * 2) * Mathf.Deg2Rad)))));
+        Vector3 hitVector = Vector3.zero;
 
-        foreach (Tuple<Vector3, Vector3> avoidRayTuple in avoidRays) { Debug.DrawLine(transform.position, transform.position + avoidRayTuple.Item1, Color.red); }
+        var zzz = Physics.SphereCastAll(transform.position, avoidRadius, Vector3.forward, LayerMask.NameToLayer("Avoidable"));
 
-        foreach (Tuple<Vector3, Vector3> avoidRayTuple in avoidRays)
-        {
-            var avoidRay = avoidRayTuple.Item1;
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, avoidRay, avoidRay.magnitude, LayerMask.GetMask("Avoidable"));
-            if (hit.collider != null)
-            {
-                return avoidRayTuple.Item2.normalized;
-            }
+        foreach (var qqq in zzz) {
+            Debug.Log("zzz" + qqq);
+            hitVector = (qqq.point - transform.position).normalized;
         }
-        return avoid.normalized * avoidStrength;
+
+        // Cast a sphere wrapping character controller 10 meters forward
+        // to see if it is about to hit anything.
+        //if (Physics.SphereCast(transform.position, avoidRadius, Vector3.forward, out hit))
+        //{
+        //    Debug.Log("HIT!!!");
+        //    distanceToObstacle = hit.distance;
+
+        //     hitVector = (hit.point - transform.position).normalized;
+        //    Debug.Log(hitVector);
+        //}
+
+        return -hitVector * avoidStrength;
+
     }
 }
