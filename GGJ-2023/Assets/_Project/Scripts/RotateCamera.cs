@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class RotateCamera : MonoBehaviour
 {
@@ -7,7 +8,7 @@ public class RotateCamera : MonoBehaviour
     public Camera cam;
     public float defaultFov = 90;
 
-
+    private Vector2 _rightStick;
     private bool rotateRight;
     private bool rotateLeft;
 
@@ -51,5 +52,17 @@ public class RotateCamera : MonoBehaviour
         {
             transform.RotateAround(target.position, Vector3.down, speed * Time.deltaTime);
         }
+
+        if (_rightStick.x != 0f) {
+            transform.RotateAround(target.position, Vector3.up, speed * _rightStick.x * Time.deltaTime);
+        }
     }
+
+    public void OnLook(InputAction.CallbackContext context)
+    {
+        _rightStick = context.ReadValue<Vector2>();
+    }
+
+
+    
 }

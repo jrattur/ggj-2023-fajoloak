@@ -90,24 +90,6 @@ public class MoveController : MonoBehaviour
             _rotation = Quaternion.RotateTowards(Quaternion.FromToRotation(Vector3.forward, direction), _rotation, _rotationSpeedDeg);
         }
 
-        // float angle = _rotation.eulerAngles.z;
-        // if (180f < angle) {
-        //     angle -= 360f;
-        // }
-        // goalAngle = Mathf.Atan2(_moveVelocity.y, Mathf.Abs(_moveVelocity.x)) * Mathf.Rad2Deg;
-        // float rotateY = _moveVelocity.x < 0f ? 180f : 0f;
-        // // if (90f < Mathf.Abs(goalAngle)) {
-        // //     goalAngle = (180f - Mathf.Abs(goalAngle)) * Mathf.Sign(goalAngle);
-        // //     rotateY = 180f;
-        // // }
-        // goalAngle = Mathf.Clamp(goalAngle, -45f, 45f);
-
-        // float diffToGoal = goalAngle - angle;
-        // if (Mathf.Abs(diffToGoal) < _rotationSpeedDeg) {
-        //     angle = goalAngle;
-        // } else {
-        //     angle += Mathf.Sign(diffToGoal) * _rotationSpeedDeg;
-        // }
         this.transform.SetPositionAndRotation(_position, _rotation);
     }
 
