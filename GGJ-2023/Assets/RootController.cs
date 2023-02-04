@@ -26,15 +26,19 @@ public class RootController : MonoBehaviour
 
     private void HandleEvent(string parentName)
     {
-        //if(gameObject != null) { 
-        //if (parentName == gameObject.transform.root.name) {
-        //    stopWatch.Reset();
-        //    stopWatch.Start();
-        //    stopped = true;
-        //    foreach (Transform child in transform) {
-        //        child.gameObject.SetActive(false);
-        //    }
-        //}
+        if (gameObject != null)
+        {
+            if (parentName == gameObject.transform.root.name)
+            {
+                stopWatch.Reset();
+                stopWatch.Start();
+                stopped = true;
+                foreach (Transform child in transform)
+                {
+                    child.gameObject.SetActive(false);
+                }
+            }
+        }
     }
 
     // Start is called before the first frame update
@@ -77,7 +81,17 @@ public class RootController : MonoBehaviour
 
         timesUpdateClosestFoundCalled++;
 
-        foreach (var nutrient in GameObject.FindGameObjectsWithTag("Nutrient"))
+        List<GameObject> nutrients = new List<GameObject>(GameObject.FindGameObjectsWithTag("Nutrient"));
+
+        var rootsGroups = new List<GameObject>(GameObject.FindGameObjectsWithTag("RootsGroup"));
+
+        var rootsGroupsCloestObjects = new List<GameObject>();
+
+        foreach(var rootsGroup in rootsGroups){
+            nutrients.Remove(rootsGroup.GetComponent<RootController>().closestNutrient);
+        }
+
+        foreach (var nutrient in nutrients)
         {
             if (closestNutrient == null)
             {

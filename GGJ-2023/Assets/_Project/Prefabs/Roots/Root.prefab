@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71a232f70db14c74fa621dc82e599073, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avoidStrength: 20
-  avoidRadius: 1
+  avoidStrength: 2
+  avoidRadius: 0.01
 --- !u!1 &3138330776523407034
 GameObject:
   m_ObjectHideFlags: 0
