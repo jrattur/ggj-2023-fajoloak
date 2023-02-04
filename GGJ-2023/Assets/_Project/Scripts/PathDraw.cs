@@ -7,6 +7,9 @@ public class PathDraw : MonoBehaviour
     [SerializeField]
     private GameObject drawPrefab;
 
+    [SerializeField]
+    private float spawnTime = 0.3f;
+
     private float timer = 0f;
 
     private Vector3 startPosition = Vector3.zero, endPosition = Vector3.zero;
@@ -17,7 +20,7 @@ public class PathDraw : MonoBehaviour
         endPosition = transform.position;
         timer += Time.deltaTime;
 
-        if (timer > 0.3f) {
+        if (timer > spawnTime) {
 
             Vector3 lineVector = endPosition - startPosition;
 
