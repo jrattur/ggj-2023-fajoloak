@@ -24,18 +24,27 @@ public class RootController : MonoBehaviour
     Stopwatch stopWatch;
     bool stopped = false;
 
+    private GameObject[] children;
+
     private void HandleEvent(string parentName)
     {
+
         if (gameObject != null)
         {
+            UnityEngine.Debug.Log("zzz" + parentName + "ccc" + gameObject.transform.root.name);
             if (parentName == gameObject.transform.root.name)
             {
+                UnityEngine.Debug.Log("sadfsdafds");
                 stopWatch.Reset();
                 stopWatch.Start();
                 stopped = true;
-                foreach (Transform child in transform)
+
+                foreach (Transform child in GetComponentsInChildren<Transform>(true))
                 {
+                    if (child.name != gameObject.name) { 
+                    Seek.OnDestroyNutrients -= HandleEvent;
                     child.gameObject.SetActive(false);
+                }
                 }
             }
         }
@@ -55,10 +64,11 @@ public class RootController : MonoBehaviour
     {
         if (stopped) {
             if (stopWatch.Elapsed.Seconds > 5f) {
+                UnityEngine.Debug.Log("Renable!!!!");
                 stopWatch.Stop();
                 stopWatch.Reset();
                 stopped = false;
-                foreach (Transform child in transform)
+                foreach (Transform child in GetComponentsInChildren<Transform>(true))
                 {
                     child.gameObject.SetActive(true);
                 }

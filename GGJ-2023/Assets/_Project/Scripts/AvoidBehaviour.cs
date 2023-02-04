@@ -21,7 +21,6 @@ public class AvoidBehaviour : SteeringBehaviour
         var zzz = Physics.SphereCastAll(transform.position, avoidRadius, Vector3.forward, LayerMask.NameToLayer("Avoidable"));
 
         foreach (var qqq in zzz) {
-            Debug.Log("zzz" + qqq);
             hitVector = (qqq.point - transform.position).normalized;
         }
 
