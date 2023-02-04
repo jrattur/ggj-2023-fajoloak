@@ -26,24 +26,24 @@ public class MoveController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (0f < _moveVelocity.y) {
-            Debug.Log($"{_moveVelocity.y} + {_accelUpDown * _upDownSign} - {_brakeUpDown}");
-            _moveVelocity.y = Mathf.Clamp(_moveVelocity.y + _accelUpDown * _upDownSign - _brakeUpDown, 0f, 1f);
+        if (0f < _inputVelocity.y) {
+            Debug.Log($"{_inputVelocity.y} + {_accelUpDown * _upDownSign} - {_brakeUpDown}");
+            _inputVelocity.y = Mathf.Clamp(_inputVelocity.y + _accelUpDown * _upDownSign - _brakeUpDown, 0f, 1f);
         }
-        else if (_moveVelocity.y < 0f) {
-            Debug.Log($"{_moveVelocity.y} + {_accelUpDown * _upDownSign} - {_brakeUpDown}");
-            _moveVelocity.y = Mathf.Clamp(_moveVelocity.y + _accelUpDown * _upDownSign + _brakeUpDown, -1f, 0f);
+        else if (_inputVelocity.y < 0f) {
+            Debug.Log($"{_inputVelocity.y} + {_accelUpDown * _upDownSign} - {_brakeUpDown}");
+            _inputVelocity.y = Mathf.Clamp(_inputVelocity.y + _accelUpDown * _upDownSign + _brakeUpDown, -1f, 0f);
         } else {
-            Debug.Log($"{_moveVelocity.y} + {_accelUpDown * _upDownSign}");
-            _moveVelocity.y = Mathf.Clamp(_moveVelocity.y + _accelUpDown * _upDownSign, -1f, 1f);
+            Debug.Log($"{_inputVelocity.y} + {_accelUpDown * _upDownSign}");
+            _inputVelocity.y = Mathf.Clamp(_inputVelocity.y + _accelUpDown * _upDownSign, -1f, 1f);
         }
     }
 
     public void OnMoveXZ(InputAction.CallbackContext context)
     {
         Vector2 move = context.ReadValue<Vector2>();
-        _moveVelocity.x = move.x;
-        _moveVelocity.z = move.y;
+        _inputVelocity.x = move.x;
+        _inputVelocity.z = move.y;
     }
 
     public void OnMoveUp(InputAction.CallbackContext context)
@@ -73,13 +73,22 @@ public class MoveController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _position += _moveVelocity * _speedMove * Time.deltaTime;
-        Vector3 direction = _moveVelocity;
+        Vector3 cameraForwardXZ = Camera.main.transform.forward;
+        cameraForwardXZ.y = 0f;
+        cameraForwardXZ.Normalize();
+        Vector3 cameraRightXZ = Camera.main.transform.right;
+        cameraRightXZ.y = 0f;
+        cameraRightXZ.Normalize();
+        Vector3 moveVelocity = _inputVelocity.z * cameraForwardXZ
+            + _inputVelocity.x * cameraRightXZ
+            + _inputVelocity.y * Vector3.up;
+        moveVelocity *= _speedMove;
+        _position += moveVelocity * Time.deltaTime;
+        Vector3 direction = moveVelocity;
         direction.Normalize();
         if (direction != Vector3.zero) {
-            _rotation = Quaternion.RotateTowards(Quaternion.FromToRotation(Vector3.right, direction), _rotation, _rotationSpeedDeg);
+            _rotation = Quaternion.RotateTowards(Quaternion.FromToRotation(Vector3.forward, direction), _rotation, _rotationSpeedDeg);
         }
-        Debug.Log(_position);
 
         // float angle = _rotation.eulerAngles.z;
         // if (180f < angle) {
@@ -102,7 +111,7 @@ public class MoveController : MonoBehaviour
         this.transform.SetPositionAndRotation(_position, _rotation);
     }
 
-    private Vector3 _moveVelocity;
+    private Vector3 _inputVelocity;
     private Vector3 _position;
     private Quaternion _rotation;
     private float _upDownSign;
