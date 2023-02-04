@@ -6,6 +6,8 @@ public class MoveController : MonoBehaviour
 {
     [SerializeField]
     float _speedByInput;
+    [SerializeField]
+    bool _isControlByArrow = false;
 
     // Start is called before the first frame update
     void Start()
@@ -18,16 +20,16 @@ public class MoveController : MonoBehaviour
     {
         moveVelocity = Vector3.zero;
 
-        if (Input.GetKey(KeyCode.DownArrow)) {
+        if (Input.GetKey(_isControlByArrow ? KeyCode.DownArrow : KeyCode.S)) {
             moveVelocity.y -= _speedByInput;
         }
-        else if (Input.GetKey(KeyCode.UpArrow)) {
+        else if (Input.GetKey(_isControlByArrow ? KeyCode.UpArrow : KeyCode.W)) {
             moveVelocity.y += _speedByInput;
         }
-        if (Input.GetKey(KeyCode.LeftArrow)) {
+        if (Input.GetKey(_isControlByArrow ? KeyCode.LeftArrow : KeyCode.A)) {
             moveVelocity.x -= _speedByInput;
         }
-        else if (Input.GetKey(KeyCode.RightArrow)) {
+        else if (Input.GetKey(_isControlByArrow ? KeyCode.RightArrow : KeyCode.D)) {
             moveVelocity.x += _speedByInput;
         }
     }
