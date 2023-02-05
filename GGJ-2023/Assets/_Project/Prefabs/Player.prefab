@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: -8320728909714184816}
   - component: {fileID: 1231344946}
   - component: {fileID: 233573394}
+  - component: {fileID: -3928950447642864157}
   - component: {fileID: 1231344945}
   - component: {fileID: 7480344596205727571}
   m_Layer: 0
@@ -35,7 +36,7 @@ Transform:
   m_Children:
   - {fileID: 819129162918275962}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &-8320728909714184816
 CapsuleCollider:
@@ -87,11 +88,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c5784e673ff91a4e855c368794e1b99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speedMove: 100
+  _speedMove: 75
   _rotationSpeedDeg: 10
   _brakeUpDown: 0.1
   _accelUpDown: 0.2
   _isControlByArrow: 0
+--- !u!114 &-3928950447642864157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4439562328691452378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6454e7ceb835dde47a7bd65ed20cc7bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _slowTime: 1
+  _slowScale: 0.5
+  _shakeTime: 0.2
+  _stopTime: 0.5
 --- !u!114 &1231344945
 MonoBehaviour:
   m_ObjectHideFlags: 0

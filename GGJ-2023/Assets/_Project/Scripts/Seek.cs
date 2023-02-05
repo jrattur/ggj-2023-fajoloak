@@ -24,9 +24,14 @@ public class Seek : SteeringBehaviour
         seek = (seekPoint.transform.position - transform.position);
 
         if (seek.magnitude < seekFoundDistance) {
-            found = true;
-            OnDestroyNutrients?.Invoke(transform.root.name);
-            Destroy(seekPoint.gameObject);
+            var gameOverCtrl = seekPoint.GetComponent<GameOverController>();
+            if (gameOverCtrl) {
+                gameOverCtrl.CaughtByRoots();
+            } else {
+                found = true;
+                OnDestroyNutrients?.Invoke(transform.root.name);
+                Destroy(seekPoint.gameObject);
+            }
         }
 
         return seek.normalized * seekStrength;

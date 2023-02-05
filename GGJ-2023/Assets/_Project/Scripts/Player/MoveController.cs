@@ -91,14 +91,6 @@ public class MoveController : MonoBehaviour
             _position += moveVelocity * Time.deltaTime;
             this.transform.SetPositionAndRotation(_position, _rotation);
         } else {
-            // RaycastHit hitInfo;
-            
-            // _body.position -= moveVelocity.normalized * 0.01f;
-            // if (_body.SweepTest(moveVelocity.normalized, out hitInfo, moveVelocity.magnitude * Time.deltaTime + 0.01f)) {
-            //     _position = hitInfo.point;
-            // }
-            // _body.MovePosition(_position);
-            // _body.rotation = _rotation;
             if (_body.velocity.magnitude < _speedMove) {
                 _body.AddForce(moveVelocity);
             }
@@ -110,9 +102,6 @@ public class MoveController : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if (other.tag == "Gem") {
             other.gameObject.SetActive(false);
-            _tmpScore += 50f;
-            Debug.Log($"Get Gem! Score is {_tmpScore}");
-            // AddScore();
         }
     }
 
@@ -121,5 +110,4 @@ public class MoveController : MonoBehaviour
     private Vector3 _position;
     private Quaternion _rotation;
     private float _upDownSign;
-    private float _tmpScore;
 }
