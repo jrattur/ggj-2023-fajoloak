@@ -16,7 +16,7 @@ public class GemInfo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CountGems();
+        // CountGems();
         SetGemNum(_gemNum);
     }
 
@@ -29,7 +29,7 @@ public class GemInfo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CountGems();
+        // CountGems();
         if (_lastGemForDebug == _gemNum) {
             SetGemNum(_gemNum);
         }

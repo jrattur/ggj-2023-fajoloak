@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 public class MoveController : MonoBehaviour
 {
     [SerializeField]
+    GemInfo _gemInfo;
+    [SerializeField]
     float _speedMove;
     [SerializeField]
     float _rotationSpeedDeg;
@@ -13,12 +15,13 @@ public class MoveController : MonoBehaviour
     float _brakeUpDown;
     [SerializeField]
     float _accelUpDown;
-    [SerializeField]
-    bool _isControlByArrow = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        if (_gemInfo == null) {
+            _gemInfo = FindFirstObjectByType<GemInfo>();
+        }
         _body = this.GetComponent<Rigidbody>();
         _position = this.transform.position;
         _rotation = this.transform.localRotation;
@@ -102,6 +105,7 @@ public class MoveController : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if (other.tag == "Gem") {
             other.gameObject.SetActive(false);
+            _gemInfo.AddGemNum();
         }
     }
 
