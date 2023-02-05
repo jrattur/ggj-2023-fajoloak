@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class RestartScene : MonoBehaviour
 {
+        public string sceneName;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +19,7 @@ public class RestartScene : MonoBehaviour
 
         if (Input.anyKey)
                 {
-                SceneManager.LoadScene (SceneManager.GetActiveScene().name);
+                SceneManager.LoadScene(sceneName);
                 }
         
     }
