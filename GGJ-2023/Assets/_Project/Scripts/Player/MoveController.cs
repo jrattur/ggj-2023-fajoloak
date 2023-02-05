@@ -8,6 +8,8 @@ public class MoveController : MonoBehaviour
     [SerializeField]
     GemInfo _gemInfo;
     [SerializeField]
+    private AudioSource _gemGetSound;
+    [SerializeField]
     float _speedMove;
     [SerializeField]
     float _rotationSpeedDeg;
@@ -106,6 +108,7 @@ public class MoveController : MonoBehaviour
         if (other.tag == "Gem") {
             other.gameObject.SetActive(false);
             _gemInfo.AddGemNum();
+            _gemGetSound.Play();
         }
     }
 

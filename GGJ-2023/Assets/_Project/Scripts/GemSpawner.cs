@@ -33,14 +33,23 @@ public class NewBehaviourScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (0f < _timer) {
-            _timer -= Time.deltaTime;
-            if (_timer <= 0f) {
-                _timer = _spawnInterval;
-                
-                Spawn();
+        if (IsGameOver()) { return; }
+
+            if (0f < _timer)
+            {
+                _timer -= Time.deltaTime;
+                if (_timer <= 0f)
+                {
+                    _timer = _spawnInterval;
+
+                    Spawn();
+                }
             }
-        }
+    }
+
+    private static bool IsGameOver()
+    {
+        return Time.timeScale < 1f;
     }
 
     private void Spawn()

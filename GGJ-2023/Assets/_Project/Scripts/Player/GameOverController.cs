@@ -6,6 +6,12 @@ using UnityEngine.SceneManagement;
 public class GameOverController : MonoBehaviour
 {
     public GameObject gameOverContainer;
+    [SerializeField]
+    private AudioSource _hitSound1;
+    [SerializeField]
+    private AudioSource _hitSound2;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,11 +38,7 @@ public class GameOverController : MonoBehaviour
             _stopTime -= Time.unscaledDeltaTime;
             if (_stopTime <= 0f) {
                 Time.timeScale = 1f;
-
-                // SceneManager.LoadScene (SceneManager.GetActiveScene().name);
-                // SceneManager.LoadScene("GameOver");
                 gameOverContainer.SetActive(true);
-
             }
         }
     }
@@ -47,6 +49,12 @@ public class GameOverController : MonoBehaviour
         _started = true;
         Time.timeScale = _slowScale;
         UnityEngine.InputSystem.InputSystem.DisableAllEnabledActions();
+
+        if (Random.value < 0.5f) {
+            _hitSound1.Play();
+        } else {
+            _hitSound2.Play();
+        }
 
         _cameraOriginalPos = Camera.main.gameObject.transform.position;
         // stop player physics
