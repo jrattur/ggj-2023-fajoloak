@@ -88,11 +88,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c5784e673ff91a4e855c368794e1b99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gemInfo: {fileID: 0}
   _speedMove: 75
   _rotationSpeedDeg: 10
   _brakeUpDown: 0.1
   _accelUpDown: 0.2
-  _isControlByArrow: 0
 --- !u!114 &-3928950447642864157
 MonoBehaviour:
   m_ObjectHideFlags: 0
