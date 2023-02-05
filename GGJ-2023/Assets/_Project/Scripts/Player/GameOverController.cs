@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameOverController : MonoBehaviour
 {
+    public GameObject gameOverContainer;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,8 +33,10 @@ public class GameOverController : MonoBehaviour
             if (_stopTime <= 0f) {
                 Time.timeScale = 1f;
 
-                SceneManager.LoadScene (SceneManager.GetActiveScene().name);
+                // SceneManager.LoadScene (SceneManager.GetActiveScene().name);
                 // SceneManager.LoadScene("GameOver");
+                gameOverContainer.SetActive(true);
+
             }
         }
     }
