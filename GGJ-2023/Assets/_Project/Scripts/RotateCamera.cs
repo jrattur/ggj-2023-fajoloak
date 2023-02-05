@@ -56,6 +56,10 @@ public class RotateCamera : MonoBehaviour
         if (_rightStick.x != 0f) {
             transform.RotateAround(target.position, Vector3.up, speed * _rightStick.x * Time.deltaTime);
         }
+        // if (_rightStick.y != 0.5f) {
+        //     Vector3 axisRight = Quaternion.Euler(0f, 90f, 0f) * transform.forward;
+        //     transform.RotateAround(target.position, axisRight, speed * 0.5f * _rightStick.y * Time.deltaTime);
+        // }
     }
 
     public void OnLook(InputAction.CallbackContext context)
