@@ -29,7 +29,7 @@ public class RootController : MonoBehaviour
     private void HandleEvent(string parentName)
     {
 
-        if (gameObject != null)
+        if (this != null && gameObject != null)
         {
             UnityEngine.Debug.Log("zzz" + parentName + "ccc" + gameObject.transform.root.name);
             if (parentName == gameObject.transform.root.name)
