@@ -307,6 +307,17 @@
                 },
                 {
                     "name": "",
+                    "id": "c2a986e4-5ffe-4049-b7da-16b262d3c9e6",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "MoveUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "a5b3d85f-6c7d-45bf-8bc6-cbaf4cf1266e",
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
@@ -334,6 +345,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
+                    "action": "MoveDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0f391a34-a65f-47b7-989e-a5a58b2ab8b9",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
                     "action": "MoveDown",
                     "isComposite": false,
                     "isPartOfComposite": false
