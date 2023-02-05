@@ -21,6 +21,16 @@ public class RootController : MonoBehaviour
     [SerializeField]
     private GameObject closestNutrient = null;
 
+    [SerializeField]
+    private float rootMultiplierTimer = 5f;
+
+    [SerializeField]
+    private float rootMultiplierUpdateCounter = 0f;
+
+    [SerializeField]
+    private float rootMultiplierAmount = 1.1f;
+
+
     Stopwatch stopWatch;
     bool stopped = false;
 
@@ -59,6 +69,8 @@ public class RootController : MonoBehaviour
         spawnRoots(transform.position);
     }
 
+
+
     // Update is called once per frame
     void Update()
     {
@@ -75,6 +87,27 @@ public class RootController : MonoBehaviour
                 }
 
             }
+        }
+
+
+        rootMultiplierUpdateCounter += Time.deltaTime;
+
+        if (rootMultiplierUpdateCounter > rootMultiplierTimer) {
+
+            foreach (var agentSteering in transform.GetComponentsInChildren<AgentSteering>()) {
+                agentSteering.rootSpeed *= rootMultiplierAmount;
+                agentSteering.transform.GetComponentInChildren<PathDraw>().spawnTime *= (1 / rootMultiplierAmount);
+            }
+
+            foreach (Transform child in transform)
+            {
+                if (child.tag == "Root")
+                {
+                    Instantiate(child.gameObject, child.transform.position, transform.rotation);
+                }
+            }
+
+            rootMultiplierUpdateCounter = 0f;
         }
 
 

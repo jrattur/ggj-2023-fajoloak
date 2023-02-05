@@ -9,6 +9,7 @@ TagManager:
   - Camera_Cube
   - RootsGroup
   - Gem
+  - Root
   layers:
   - Default
   - TransparentFX

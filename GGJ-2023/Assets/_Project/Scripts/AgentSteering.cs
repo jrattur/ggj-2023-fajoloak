@@ -7,6 +7,9 @@ public class AgentSteering : MonoBehaviour
     [SerializeField]
     private SteeringBehaviour[] steeringBehaviours;
 
+    [SerializeField]
+    public float rootSpeed = 1f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +25,8 @@ public class AgentSteering : MonoBehaviour
         foreach (var steeringBehaviour in steeringBehaviours) {
             steering += steeringBehaviour.calculateMove();
         }
+
+        steering *= rootSpeed;
 
         transform.LookAt(transform.position + steering);
 

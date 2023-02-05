@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2222769993579011671
 MonoBehaviour:
@@ -45,7 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nutrients: 100
-  numberOfRoots: 15
+  numberOfRoots: 1
   rootPrefab: {fileID: 3138330777012738704, guid: cf864b2eb81f9ce4c9f3ea183abe2362, type: 3}
   seekComponents: []
   closestNutrient: {fileID: 0}
+  rootMultiplierTimer: 5
+  rootMultiplierUpdateCounter: 0
+  rootMultiplierAmount: 1.1

@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 3138330777012738710}
   m_Layer: 0
   m_Name: Root
-  m_TagString: Untagged
+  m_TagString: Root
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -225,6 +225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   steeringBehaviours: []
+  rootSpeed: 1
 --- !u!1001 &253176319496814993
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ public class PathDraw : MonoBehaviour
     private GameObject drawPrefab;
 
     [SerializeField]
-    private float spawnTime = 0.3f;
+    public float spawnTime = 0.3f;
 
     private float timer = 0f;
 

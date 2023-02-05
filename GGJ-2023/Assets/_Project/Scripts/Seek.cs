@@ -6,10 +6,10 @@ using UnityEngine;
 public class Seek : SteeringBehaviour
 {
     [SerializeField]
-    private float seekStrength = 1f;
+    public float seekStrength = 1f;
 
     [SerializeField]
-    private float seekFoundDistance = 5f;
+    public float seekFoundDistance = 5f;
 
     public GameObject seekPoint;
 

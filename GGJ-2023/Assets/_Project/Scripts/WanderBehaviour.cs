@@ -6,16 +6,16 @@ public class WanderBehaviour : SteeringBehaviour
 {
 
     [SerializeField]
-    private float wanderSphereDistance = 0.2f;
+    public float wanderSphereDistance = 0.2f;
 
     [SerializeField]
-    private float wanderAngleLimit = 30f;
+    public float wanderAngleLimit = 30f;
 
     [SerializeField]
-    private float wanderCircleRadius = 1f;
+    public float wanderCircleRadius = 1f;
 
     [SerializeField]
-    private float wanderSpeed = 1f;
+    public float wanderSpeed = 1f;
 
     float wanderAngle = 0f;
 

@@ -5,10 +5,10 @@ using UnityEngine;
 public class AvoidBehaviour : SteeringBehaviour
 {
     [SerializeField]
-    private float avoidStrength = 5f;
+    public float avoidStrength = 5f;
 
     [SerializeField]
-    private float avoidRadius = 20f;
+    public float avoidRadius = 20f;
 
     public override Vector3 calculateMove()
     {
