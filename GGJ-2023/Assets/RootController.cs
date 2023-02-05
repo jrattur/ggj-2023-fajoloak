@@ -60,12 +60,42 @@ public class RootController : MonoBehaviour
         }
     }
 
+    private void onCollectGemHandler() {
+
+        if (this != null)
+        {
+            List<GameObject> children = new List<GameObject>();
+            foreach (Transform child in transform)
+            {
+                if (child.tag == "Root")
+                {
+                    Instantiate(child.gameObject, child.transform.position, transform.rotation);
+                }
+            }
+
+            children.RemoveRange(0, children.Count / 2);
+
+            foreach (var child in children)
+            {
+                Destroy(child);
+            }
+
+            foreach (var agentSteering in transform.GetComponentsInChildren<AgentSteering>())
+            {
+                agentSteering.rootSpeed *= -rootMultiplierAmount;
+                agentSteering.transform.GetComponentInChildren<PathDraw>().spawnTime *= -(1 / rootMultiplierAmount);
+            }
+        }
+
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         stopWatch = new Stopwatch();
 
         Seek.OnDestroyNutrients += HandleEvent;
+        MoveController.OnCollectGem += onCollectGemHandler;
         spawnRoots(transform.position);
     }
 
