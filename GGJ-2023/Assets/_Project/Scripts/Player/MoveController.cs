@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,8 @@ public class MoveController : MonoBehaviour
     float _brakeUpDown;
     [SerializeField]
     float _accelUpDown;
+
+    public static event Action OnCollectGem;
 
     // Start is called before the first frame update
     void Start()
@@ -108,6 +111,7 @@ public class MoveController : MonoBehaviour
         if (other.tag == "Gem") {
             other.gameObject.SetActive(false);
             _gemInfo.AddGemNum();
+            OnCollectGem.Invoke();
             _gemGetSound.Play();
         }
     }
